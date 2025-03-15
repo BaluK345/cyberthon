@@ -1,0 +1,163 @@
+body {
+    background-color: #efe9e0;
+    margin: 0;
+    font-family: "Krona One", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Logo Styling */
+.fa-logo-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.fa-logo-analyze {
+    width: 50px;
+    height: 50px;
+}
+
+/* Main Box */
+.fa-analyze-box {
+    background-color: white;
+    border-radius: 10px 10px 10px 10px;
+    width: 1100px;
+    height: 550px; /* Adjusted height for better spacing */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* User Profile Button */
+.fa-user-profile-button {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    background-color: white; /* White background */
+    border: 3px solid white; /* White border */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px; /* Adjusted size */
+    height: 55px;
+    border-radius: 50%; /* Makes it circular */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Soft shadow */
+}
+
+/* Profile Icon Styling */
+.fa-profile-icon {
+    width: 30px; /* Icon size */
+    height: 30px;
+    color: black; /* Ensures visibility */
+}
+
+/* Tabs */
+.fa-tabs {
+    display: flex;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.fa-tab {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+    border: none;
+}
+
+.fa-tab.active {
+    background-color: #008c8c;
+    color: rgb(0, 0, 0);
+}
+
+/* Move File and Proof slightly to the left */
+.fa-input-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Aligns to the left */
+    width: 100%;
+    margin-left: 300px; /* Moves it to the left */
+}
+
+/* Move File Upload Up */
+.fa-file-upload {
+    margin-top: -40px; /* Moves file input up */
+}
+
+/* Move Proof Upload Down */
+.fa-proof-upload {
+    margin-top: 100px; /* Moves proof input down */
+}
+
+/* Labels */
+.fa-label {
+    font-weight: bold;
+    color: black;
+    width: 120px;
+    text-align: right;
+    margin-right: 20px;
+}
+
+/* Upload Buttons */
+.fa-file-button {
+    padding: 10px 20px;
+    background-color: #c0c0c0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    color: black;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fa-file-button:hover {
+    background-color: #a8a8a8;
+}
+
+/* File Name Display */
+.fa-file-name {
+    font-size: 14px;
+    color: #333;
+    margin-top: 5px;
+}
+
+/* Analyze Button Container */
+.fa-analyze-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 50px; /* Adjusted spacing */
+    margin-left: -10px;
+}
+
+/* Analyze Button */
+.fa-analyze-button {
+    padding: 12px 40px;
+    border: none;
+    background-color: #008c8c;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.fa-analyze-button:hover {
+    background-color: #006f6f;
+}
