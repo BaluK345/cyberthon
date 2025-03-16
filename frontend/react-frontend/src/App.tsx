@@ -9,6 +9,7 @@ import Category from "./pages/category"
 import Complaint from "./pages/complaint";
 import LoginPage from "./pages/login page";
 import RegistrationPage from "./pages/registrationpage";
+import OTPPage from "./pages/otp";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/complaint" element={<Complaint/>} />
           <Route path="/login" element={<LoginPage/>} />
           <Route path="/registration" element={<RegistrationPage/>} />
+          <Route path="/otp" element={<OTPPage/>} />
         </Routes>
       </div>
     </Router>
