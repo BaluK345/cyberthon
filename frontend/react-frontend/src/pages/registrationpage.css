@@ -1,0 +1,108 @@
+/* General Page Styling */
+body {
+    background-color: #efe9e0;
+    font-family: "Krona One", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+/* Center Logo */
+.registration-page-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.registration-page-logo {
+    width: 80px;
+    height: 80px;
+}
+
+/* Registration Box */
+.registration-page-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
+    height: 480px;
+    margin-top:-5px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Registration Title */
+.registration-page-title {
+    font-size: 22px;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+/* Input Fields */
+.registration-page-input-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.registration-page-input-group label {
+    font-size: 12px;
+    color: #000;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Input Field Styling */
+.registration-page-input-group input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    font-size: 12px;
+    background-color: #f5f5f5;
+    color: black;
+}
+
+/* Sign Up Button */
+.registration-page-sign-up-button {
+    width: 50%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    background-color: #008c8c;
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.registration-page-sign-up-button:hover {
+    background-color: #006f6f;
+}
+
+/* Sign In Link */
+.registration-page-signin-text {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #000;
+}
+
+.registration-page-signin-link {
+    color: #008c8c;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.registration-page-signin-link:hover {
+    text-decoration: underline;
+}
