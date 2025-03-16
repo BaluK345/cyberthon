@@ -161,3 +161,22 @@ body {
 .fa-analyze-button:hover {
     background-color: #006f6f;
 }
+
+/* Back Button Styling */
+.fa-back-button {
+    position: absolute;
+    top: 100px;
+    left: 50px; /* Adjusted position */
+    padding: 10px 20px;
+    background-color: #008c8c;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.fa-back-button:hover {
+    background-color: #006f6f;
+}

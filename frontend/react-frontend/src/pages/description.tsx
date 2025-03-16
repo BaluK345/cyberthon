@@ -62,6 +62,10 @@ const Description: React.FC = () => {
           <button className="user-profile-button">
             <FaUser className="profile-icon" />
           </button>
+          {/* Back Button */}
+      <button className="back-button" onClick={() => window.history.back()}>
+        Back
+      </button>
           <button className="analyze-button">Analyze</button>
         </div>
       </div>

@@ -21,6 +21,11 @@ const FileAnalyze: React.FC = () => {
 
   return (
     <div className="fa-container">
+      {/* Back Button */}
+      <button className="fa-back-button" onClick={() => window.history.back()}>
+        Back
+      </button>
+
       {/* Logo Section */}
       <div className="fa-logo-container">
         <img src={crimeAtlasLogo} alt="Crime Atlas Logo" className="fa-logo-analyze" />
@@ -58,7 +63,7 @@ const FileAnalyze: React.FC = () => {
           </div>
         </div>
 
-        {/* Analyze Button moved to the bottom */}
+        {/* Analyze Button */}
         <div className="fa-analyze-button-container">
           <button className="fa-analyze-button">Analyze</button>
         </div>
