@@ -7,6 +7,7 @@ import Analyze from "./pages/fileanalyze"
 import Description from "./pages/description"
 import Category from "./pages/category"
 import Complaint from "./pages/complaint";
+import LoginPage from "./pages/login page";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -47,6 +48,7 @@ function App() {
           <Route path="/description" element={<Description/>} />
           <Route path="/category" element={<Category/>} />
           <Route path="/complaint" element={<Complaint/>} />
+          <Route path="/login" element={<LoginPage/>} />
         </Routes>
       </div>
     </Router>
