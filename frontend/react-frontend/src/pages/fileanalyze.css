@@ -1,182 +1,241 @@
-body {
-    background-color: #efe9e0;
-    margin: 0;
-    font-family: "Krona One", sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+/* General Container */
+.fa-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1200px;
+  background-color: #eee8e0; /* Light beige */
+  position: relative;
 }
 
-/* Logo Styling */
-.fa-logo-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+/* Logo */
+.fa-logo {
+  position: absolute;
+  top: -120px;
+  left: -130px;
+  width: 50px;
 }
 
-.fa-logo-analyze {
-    width: 50px;
-    height: 50px;
+/* Back Button */
+.fa-back-button {
+  position: absolute;
+  top: -1px;
+  left: -80px;
+  background-color: #15837c;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-/* Main Box */
-.fa-analyze-box {
-    background-color: white;
-    border-radius: 10px 10px 10px 10px;
-    width: 1100px;
-    height: 550px; /* Adjusted height for better spacing */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border: none;
-    text-align: center;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+/* User Profile (Top-Right) */
+.fa-user-profile {
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* User Profile Button */
-.fa-user-profile-button {
-    position: absolute;
-    top: 40px;
-    right: 50px;
-    background-color: white; /* White background */
-    border: 3px solid white; /* White border */
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 55px; /* Adjusted size */
-    height: 55px;
-    border-radius: 50%; /* Makes it circular */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Soft shadow */
+.fa-user-icon {
+  width: 35px;
+  height: 35px;
+  color: #000;
+  transition: transform 0.2s;
 }
 
-/* Profile Icon Styling */
-.fa-profile-icon {
-    width: 30px; /* Icon size */
-    height: 30px;
-    color: black; /* Ensures visibility */
+/* Main Content */
+.fa-content {
+  width: 90%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
 }
 
-/* Tabs */
+/* Tabs Positioned to Touch Border with Sharp Edges */
 .fa-tabs {
-    display: flex;
-    border-bottom: 2px solid rgb(0, 0, 0);
-    background-color: white;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .fa-tab {
-    flex: 1;
-    padding: 12px;
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    color: black;
-    border: none;
+  flex: 1;
+  padding: 15px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 0; /* Sharp edges */
 }
 
 .fa-tab.active {
-    background-color: #008c8c;
-    color: rgb(0, 0, 0);
+  background-color: #15837c;
 }
 
-/* Move File and Proof slightly to the left */
+/* Content Wrapper for Tabs */
+.fa-tab-content {
+  display: none;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+}
+
+.fa-tab-content.active {
+  display: block;
+}
+
+/* Box for Upload Inputs */
+.fa-box {
+  width: 80%;
+  height: 350px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+/* Upload Section */
+.fa-upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
 .fa-input-group {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Aligns to the left */
-    width: 100%;
-    margin-left: 300px; /* Moves it to the left */
+  display: flex;
+  align-items: center;
+  gap: 40px !important; 
+  margin-top: 30px; /* Adjusted spacing */
+  margin-bottom: 30px;
 }
 
-/* Move File Upload Up */
-.fa-file-upload {
-    margin-top: -40px; /* Moves file input up */
-}
-
-/* Move Proof Upload Down */
-.fa-proof-upload {
-    margin-top: 100px; /* Moves proof input down */
-}
-
-/* Labels */
+/* Label */
 .fa-label {
-    font-weight: bold;
-    color: black;
-    width: 120px;
-    text-align: right;
-    margin-right: 20px;
+  font-weight: bold;
+  color: #000;
+  white-space: nowrap; /* Prevents label from wrapping */
+  margin-bottom: 5px; /* Added gap between label and input */
 }
 
-/* Upload Buttons */
-.fa-file-button {
-    padding: 10px 20px;
-    background-color: #c0c0c0;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 12px;
-    color: black;
-    width: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Upload Buttons - Same Height & Width */
+.fa-upload-button {
+  background-color: #c4c3c3;
+  color: black;
+  font-size: 12px;
+  padding: 12px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  width: 200px !important; /* Same width */
+  height: 40px; /* Same height */
 }
 
-.fa-file-button:hover {
-    background-color: #a8a8a8;
+.fa-upload-button:hover {
+  background-color: #909090;
 }
 
-/* File Name Display */
+/* Analyze Buttons - Separate for Each Tab */
+.fa-analyze-button-file {
+  background-color: #15837c !important;
+  color: rgb(0, 0, 0) !important;
+  padding: 12px 25px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-top: 140px !important; /* Adjusted spacing */
+}
+
+.fa-analyze-button-file:hover {
+  background-color: #126b65 !important;
+}
+
+/* Analyze Button (Only for Description Tab) */
+.fa-analyze-button-description {
+  background-color: #15837c !important;
+  color: rgb(0, 0, 0) !important;
+  padding: 12px 25px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px !important; /* Reduced spacing to bring it up */
+  margin-bottom: 170px;
+}
+
+.fa-analyze-button-description:hover {
+  background-color: #126b65 !important;
+}
+
+
+/* Hide default file input */
+.fa-hidden-input {
+  display: none;
+}
+
+/* Display selected file name */
 .fa-file-name {
-    font-size: 14px;
-    color: #333;
-    margin-top: 5px;
+  font-size: 14px;
+  color: #333;
+  margin-left: 10px;
+  font-weight: bold;
 }
 
-/* Analyze Button Container */
-.fa-analyze-button-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 50px; /* Adjusted spacing */
-    margin-left: -10px;
+/* Description Section */
+.fa-description-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin-top: 60px;
 }
 
-/* Analyze Button */
-.fa-analyze-button {
-    padding: 12px 40px;
-    border: none;
-    background-color: #008c8c;
-    color: rgb(0, 0, 0);
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
+/* Description Box */
+.fa-description-box {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  margin-top: 100px;
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+  background-color: rgb(232, 232, 232);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
-.fa-analyze-button:hover {
-    background-color: #006f6f;
+/* Move "Description:" label inside the box */
+.fa-description-label {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 14px;
+  color: #000000;
+  padding: 2px 5px;
 }
 
-/* Back Button Styling */
-.fa-back-button {
-    position: absolute;
-    top: 100px;
-    left: 50px; /* Adjusted position */
-    padding: 10px 20px;
-    background-color: #008c8c;
-    color: rgb(0, 0, 0);
-    font-size: 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.fa-back-button:hover {
-    background-color: #006f6f;
+/* Textarea */
+.fa-description-input {
+  width: 100%;
+  height: 100%;
+  padding: 30px 10px 10px 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+  color: black;
+  resize: none;
 }

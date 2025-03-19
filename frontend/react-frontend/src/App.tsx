@@ -4,7 +4,6 @@ import reactLogo from "./assets/react.svg";
 import "./App.css";
 import Logo from "./pages/logo";
 import Analyze from "./pages/fileanalyze"
-import Description from "./pages/description"
 import Category from "./pages/category"
 import Complaint from "./pages/complaint";
 import LoginPage from "./pages/login page";
@@ -47,7 +46,6 @@ function App() {
           } />
           <Route path="/logo" element={<Logo />} />
           <Route path="/analyze" element={<Analyze/>} />
-          <Route path="/description" element={<Description/>} />
           <Route path="/category" element={<Category/>} />
           <Route path="/complaint" element={<Complaint/>} />
           <Route path="/login" element={<LoginPage/>} />
