@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./otp.css";
-import logo from "../assets/logo cyber.png"; // Ensure correct logo path
+import logo from "../assets/logo_cyber.png"; // Ensure correct logo path
 
 const OTPPage: React.FC = () => {
   const [otp, setOtp] = useState("");

@@ -1,6 +1,6 @@
 import React from "react";
 import "./logo.css";
-import logoImage from "../assets/logo cyber.png"; // Ensure correct path
+import logoImage from "../assets/logo_cyber.png"; // Ensure correct path
 
 const LogoPage: React.FC = () => {
   return (

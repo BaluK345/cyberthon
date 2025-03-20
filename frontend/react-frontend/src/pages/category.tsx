@@ -1,30 +1,46 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDescription } from "./DescriptionContext";
 import "./category.css";
-import logo from "../assets/logo cyber.png"; 
 import { FaUser } from "react-icons/fa";
+import logo from "../assets/logo_cyber.png"; // Corrected path
 
 const Category: React.FC = () => {
+  const navigate = useNavigate();
+  const { description } = useDescription();
+
   return (
-    <div className="container">
-      {/* Logo Section */}
-      <div className="logo-container">
-        <img src={logo} alt="Crime Atlas Logo" className="logo" />
+    <div className="category-container">
+      {/* Logo */}
+      <img src={logo} alt="Logo" className="category-logo" />
+
+      {/* User Profile */}
+      <div className="category-user-profile">
+        <FaUser className="category-user-icon" />
       </div>
 
-      {/* Main Box */}
-      <div className="category-box">
-        {/* Tabs */}
-        <div className="tabs">
-          <div className="tab">Description</div>
-          <div className="tab">Category</div>
+      {/* Back Button */}
+      <button className="back-button" onClick={() => navigate("/analyze")}>
+        Back
+      </button>
+
+      {/* Table Content */}
+      <div className="category-content">
+        <div className="category-box">
+          <div className="category-header">Description</div>
+          <div className="category-header">Category</div>
         </div>
-        <button className="user-profile-button">
-  <FaUser className="profile-icon" />
-</button>
 
-        {/* Content Box */}
-        <div className="content-area"></div>
+        <div className="category-body">
+          <div className="category-description">
+            {description || "No description provided."}
+          </div>
+          <div className="category-category">No category assigned.</div>
+        </div>
       </div>
+
+      {/* Submit Button */}
+      <button className="submit-button">Submit</button>
     </div>
   );
 };

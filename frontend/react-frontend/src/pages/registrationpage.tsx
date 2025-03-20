@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./registrationpage.css";
-import logo from "../assets/logo cyber.png"; // Ensure the correct path to your logo
+import logo from "../assets/logo_cyber.png"; // Ensure the correct path to your logo
 
 const RegistrationPage: React.FC = () => {
   const [formData, setFormData] = useState({

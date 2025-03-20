@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./complaint.css";
-import logo from "../assets/logo cyber.png";
+import logo from "../assets/logo_cyber.png";
 import { FaSearch, FaChevronDown, FaChevronUp, FaUser } from "react-icons/fa";
 
 const Complaint: React.FC = () => {

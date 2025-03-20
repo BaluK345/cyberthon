@@ -1,15 +1,43 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDescription } from "./DescriptionContext";
 import "./fileanalyze.css";
-import crimeAtlasLogo from "../assets/logo cyber.png";
+import crimeAtlasLogo from "../assets/logo_cyber.png";
 import { FaUser } from "react-icons/fa"; // User profile icon
 
 const FileAnalyze: React.FC = () => {
+  const navigate = useNavigate();
+  const { description, setDescription } = useDescription();
   const [activeTab, setActiveTab] = useState<"file" | "description">("file");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [fileProof, setFileProof] = useState<File | null>(null); // Separate proof state for File tab
-  const [descriptionProof, setDescriptionProof] = useState<File | null>(null); // Separate proof state for Description tab
-  const [description, setDescription] = useState<string>("");
+  const [fileProof, setFileProof] = useState<File | null>(null); // Proof for File tab
+  const [descriptionProof, setDescriptionProof] = useState<File | null>(null); // Proof for Description tab
+  const [inputDescription, setInputDescription] = useState<string>(description); // Local description
 
+  const FileAnalyze: React.FC = () => {
+    console.log("FileAnalyze component is rendering");
+  
+    return (
+      <div>
+        <h1>File Analyze Page</h1>
+      </div>
+    );
+    return (
+      <div style={{ border: "2px solid red", padding: "20px", background: "white" }}>
+        <h1>File Analyze Page</h1>
+      </div>
+    );
+
+    console.log("FileAnalyze component is rendering!");
+  
+  return (
+    <div style={{ border: "2px solid red", padding: "20px", background: "white" }}>
+      <h1>File Analyze Page</h1>
+    </div>
+  );
+  };
+  
+  
   // Handle file upload
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -28,13 +56,21 @@ const FileAnalyze: React.FC = () => {
     }
   };
 
+  // Handle analyze button
+  const handleAnalyze = () => {
+    if (activeTab === "description") {
+      setDescription(inputDescription); // Save description globally
+      navigate("/category"); // Navigate to the category page
+    }
+  };
+
   return (
     <div className="fa-container">
-      {/* Logo (Separate from Back Button) */}
+      {/* Logo */}
       <img src={crimeAtlasLogo} alt="Logo" className="fa-logo" />
 
       {/* Back Button */}
-      <button className="fa-back-button">Back</button>
+      <button className="fa-back-button" onClick={() => navigate(-1)}>Back</button>
 
       {/* User Profile (Top Right) */}
       <div className="fa-user-profile">
@@ -101,7 +137,7 @@ const FileAnalyze: React.FC = () => {
               </div>
 
               {/* Analyze Button (File Tab) */}
-              <button className="fa-analyze-button-file">Analyze</button>
+              <button className="fa-analyze-button-file" disabled>Analyze</button>
             </div>
           )}
 
@@ -112,8 +148,8 @@ const FileAnalyze: React.FC = () => {
                 <textarea
                   className="fa-description-input"
                   placeholder="Write from here..."
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  value={inputDescription}
+                  onChange={(e) => setInputDescription(e.target.value)}
                 />
               </div>
 
@@ -139,7 +175,9 @@ const FileAnalyze: React.FC = () => {
               </div>
 
               {/* Analyze Button (Description Tab) */}
-              <button className="fa-analyze-button-description">Analyze</button>
+              <button className="fa-analyze-button-description" onClick={handleAnalyze}>
+                Analyze
+              </button>
             </div>
           )}
         </div>

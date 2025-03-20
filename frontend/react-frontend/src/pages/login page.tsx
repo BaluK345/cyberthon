@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./loginpage.css";
-import logo from "../assets/logo cyber.png"; // Ensure the correct path to your logo
+import logo from "../assets/logo_cyber.png"; // Ensure the correct path to your logo
 
 const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
