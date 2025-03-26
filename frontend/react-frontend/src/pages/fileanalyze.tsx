@@ -14,30 +14,6 @@ const FileAnalyze: React.FC = () => {
   const [descriptionProof, setDescriptionProof] = useState<File | null>(null); // Proof for Description tab
   const [inputDescription, setInputDescription] = useState<string>(description); // Local description
 
-  const FileAnalyze: React.FC = () => {
-    console.log("FileAnalyze component is rendering");
-  
-    return (
-      <div>
-        <h1>File Analyze Page</h1>
-      </div>
-    );
-    return (
-      <div style={{ border: "2px solid red", padding: "20px", background: "white" }}>
-        <h1>File Analyze Page</h1>
-      </div>
-    );
-
-    console.log("FileAnalyze component is rendering!");
-  
-  return (
-    <div style={{ border: "2px solid red", padding: "20px", background: "white" }}>
-      <h1>File Analyze Page</h1>
-    </div>
-  );
-  };
-  
-  
   // Handle file upload
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -58,7 +34,9 @@ const FileAnalyze: React.FC = () => {
 
   // Handle analyze button
   const handleAnalyze = () => {
-    if (activeTab === "description") {
+    if (activeTab === "file") {
+      setActiveTab("description"); // Navigate to Description tab
+    } else if (activeTab === "description") {
       setDescription(inputDescription); // Save description globally
       navigate("/category"); // Navigate to the category page
     }
@@ -137,7 +115,9 @@ const FileAnalyze: React.FC = () => {
               </div>
 
               {/* Analyze Button (File Tab) */}
-              <button className="fa-analyze-button-file" disabled>Analyze</button>
+              <button className="fa-analyze-button-file" onClick={handleAnalyze}>
+                Analyze
+              </button>
             </div>
           )}
 

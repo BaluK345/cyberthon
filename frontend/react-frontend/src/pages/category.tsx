@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "./category.css";
 import logo from "../assets/logo_cyber.png"; // Ensure you have the logo
 import { FaUser } from "react-icons/fa";
+import { useDescription } from "./DescriptionContext";
 
 const Category: React.FC = () => {
   const [showCategory, setShowCategory] = useState(false);
+  const { description } = useDescription();
 
   return (
     <div className="category-body">
@@ -19,7 +21,7 @@ const Category: React.FC = () => {
         {/* View Category Toggle Button */}
         <div className="view-category">
           <button onClick={() => setShowCategory(!showCategory)}>
-            {showCategory ? "<" : "View Category >"}
+           <span>{showCategory ? "<" : ">"}</span>
           </button>
         </div>
 
@@ -27,7 +29,7 @@ const Category: React.FC = () => {
         {!showCategory ? (
           <div className="description-container">
             <label className="description-label">Description:</label>
-            <div className="description-box"></div>
+            <div className="description-box">{description}</div>
           </div>
         ) : (
           <div className="category-box">
