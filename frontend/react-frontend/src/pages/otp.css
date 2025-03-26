@@ -55,7 +55,7 @@ body {
     color: #000;
     font-weight: bold;
     display: block;
-    margin-bottom:15px;
+    margin-bottom: 15px;
 }
 
 .otp-input {
@@ -66,6 +66,21 @@ body {
     font-size: 12px;
     background-color: #f5f5f5;
     color: black;
+    outline: none;
+}
+
+/* 🔹 If input is empty, show red border */
+.otp-input.error {
+    border: 1px solid red;
+    background-color: #ffefef;
+}
+
+/* 🔹 Error Message */
+.otp-error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: left;
 }
 
 /* Confirm Button */
@@ -83,6 +98,12 @@ body {
     margin-top: 10px;
 }
 
-.otp-confirm-button:hover {
+/* 🔹 Disable confirm button if no OTP entered */
+.otp-confirm-button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+.otp-confirm-button:hover:enabled {
     background-color: #006f6f;
 }

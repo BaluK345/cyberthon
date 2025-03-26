@@ -1,9 +1,10 @@
-import React, { useState, useRef } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./registrationpage.css";
 import logo from "../assets/logo_cyber.png";
-import { Eye, EyeOff } from "lucide-react"; // Import icons
 
 const RegistrationPage: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -12,25 +13,34 @@ const RegistrationPage: React.FC = () => {
     confirmPassword: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [errors, setErrors] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  // Refs for input fields
-  const phoneRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const confirmPasswordRef = useRef<HTMLInputElement>(null);
-  const submitButtonRef = useRef<HTMLButtonElement>(null);
-
+  // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" }); // Clear error when typing
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, nextRef: React.RefObject<HTMLInputElement | HTMLButtonElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      nextRef.current?.focus();
-    }
+  // Validate and navigate to OTP Page
+  const handleSignUp = () => {
+    let newErrors = { ...errors };
+    let hasError = false;
+
+    Object.keys(formData).forEach((key) => {
+      if (!formData[key as keyof typeof formData]) {
+        newErrors[key as keyof typeof formData] = `This ${key} is required`;
+        hasError = true;
+      }
+    });
+
+    setErrors(newErrors);
+    if (!hasError) navigate("/otp"); // Navigate only if no errors
   };
 
   return (
@@ -44,42 +54,44 @@ const RegistrationPage: React.FC = () => {
 
         <div className="registration-page-input-group">
           <label>Name:</label>
-          <input type="text" name="name" placeholder="Enter your Name" value={formData.name} onChange={handleChange} onKeyDown={(e) => handleKeyDown(e, phoneRef)} />
+          <input type="text" name="name" placeholder="Enter your Name" value={formData.name} onChange={handleChange} />
+          {errors.name && <p className="error-text">{errors.name}</p>}
         </div>
 
         <div className="registration-page-input-group">
           <label>Phone Number:</label>
-          <input type="tel" name="phone" placeholder="Enter your Phone Number" value={formData.phone} onChange={handleChange} onKeyDown={(e) => handleKeyDown(e, emailRef)} ref={phoneRef} />
+          <input type="tel" name="phone" placeholder="Enter your Phone Number" value={formData.phone} onChange={handleChange} />
+          {errors.phone && <p className="error-text">{errors.phone}</p>}
         </div>
 
         <div className="registration-page-input-group">
           <label>Email:</label>
-          <input type="email" name="email" placeholder="Enter your Email" value={formData.email} onChange={handleChange} onKeyDown={(e) => handleKeyDown(e, passwordRef)} ref={emailRef} />
+          <input type="email" name="email" placeholder="Enter your Email" value={formData.email} onChange={handleChange} />
+          {errors.email && <p className="error-text">{errors.email}</p>}
         </div>
 
         <div className="registration-page-input-group">
           <label>Password:</label>
-          <div className="password-input-wrapper">
-            <input type={showPassword ? "text" : "password"} name="password" placeholder="Enter your Password" value={formData.password} onChange={handleChange} onKeyDown={(e) => handleKeyDown(e, confirmPasswordRef)} ref={passwordRef} />
-            <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <EyeOff /> : <Eye />}
-            </span>
-          </div>
+          <input type="password" name="password" placeholder="Enter your Password" value={formData.password} onChange={handleChange} />
+          {errors.password && <p className="error-text">{errors.password}</p>}
         </div>
 
         <div className="registration-page-input-group">
           <label>Confirm Password:</label>
-          <div className="password-input-wrapper">
-            <input type={showConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder="Enter your Confirm Password" value={formData.confirmPassword} onChange={handleChange} onKeyDown={(e) => handleKeyDown(e, submitButtonRef)} ref={confirmPasswordRef} />
-            <span className="eye-icon" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-              {showConfirmPassword ? <EyeOff /> : <Eye />}
-            </span>
-          </div>
+          <input type="password" name="confirmPassword" placeholder="Enter Confirm Password" value={formData.confirmPassword} onChange={handleChange} />
+          {errors.confirmPassword && <p className="error-text">{errors.confirmPassword}</p>}
         </div>
 
-        <button className="registration-page-sign-up-button" ref={submitButtonRef}>Sign Up</button>
+        <button className="registration-page-sign-up-button" onClick={handleSignUp}>
+          Sign Up
+        </button>
 
-        <p className="registration-page-signin-text">Have an account? <span className="registration-page-signin-link">Sign In</span></p>
+        <p className="registration-page-signin-text">
+          Have an account?{" "}
+          <span className="registration-page-signin-link" onClick={() => navigate("/login")}>
+            Sign In
+          </span>
+        </p>
       </div>
     </div>
   );

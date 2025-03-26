@@ -1,27 +1,46 @@
-import React, { useState, useRef } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./otp.css";
 import logo from "../assets/logo_cyber.png"; // Ensure correct logo path
 
 const OTPPage: React.FC = () => {
+  const navigate = useNavigate();
   const [otp, setOtp] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [error, setError] = useState("");
 
-  // Move focus to Confirm button on Enter key press
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      buttonRef.current?.focus();
-    }
+  // Handle OTP input change
+  const handleOTPChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, ""); // Allow only numbers
+    setOtp(value);
+    setError(""); // Clear error when typing
   };
 
-  // Handle Confirm Button Key Press
-  const handleButtonKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      buttonRef.current?.click(); // Triggers button click
+  // Handle Confirm button click
+  const handleConfirm = () => {
+    if (otp.length !== 6) {
+      setError("Please enter a valid 6-digit OTP");
+      return;
     }
+
+    // Simulate backend processing & navigate to login page
+    setTimeout(() => {
+      navigate("/login");
+    }, 500);
   };
+
+  // Allow "Enter" key to submit OTP
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "Enter" && otp.length === 6) {
+        handleConfirm();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [otp]);
 
   return (
     <div className="otp-container">
@@ -39,21 +58,20 @@ const OTPPage: React.FC = () => {
           <label className="otp-label">OTP:</label>
           <input
             type="text"
-            className="otp-input"
+            className={`otp-input ${error ? "error" : ""}`}
             placeholder="Enter your OTP"
             maxLength={6}
             value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-            onKeyDown={handleKeyDown}
-            ref={inputRef}
+            onChange={handleOTPChange}
           />
+          {error && <p className="otp-error-text">{error}</p>}
         </div>
 
-        {/* Confirm Button */}
+        {/* Confirm Button: Disabled if OTP is not 6 digits */}
         <button
           className="otp-confirm-button"
-          ref={buttonRef}
-          onKeyDown={handleButtonKeyDown}
+          onClick={handleConfirm}
+          disabled={otp.length !== 6}
         >
           Confirm
         </button>

@@ -140,3 +140,22 @@ body {
     cursor: pointer;
   }
   
+  .error-text {
+    color: red;
+    font-size: 8px;
+    margin-top: 5px;
+    height: 10px; /* Ensures a fixed height so space is always allocated */
+    display: block; /* Makes sure the error message doesn't affect surrounding elements */
+}
+
+/* Prevents shifting of input fields */
+.registration-page-input-group  {
+    margin-bottom: 15px; /* Increased spacing to avoid text overflow */
+}
+
+/* Ensures the container height remains stable */
+.registration-page-box {
+    min-height: 370px; /* Adjust as needed */
+    overflow: hidden; /* Prevents content overflow */
+}
+

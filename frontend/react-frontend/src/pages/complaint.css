@@ -50,14 +50,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
 }
 
 /* Profile Icon Styling */
 .profile-icon {
     width: 35px;
     height: 35px;
+    color: black; /* Change color to black */
     transition: transform 0.2s;
 }
+
 
 /* Search Bar */
 .search-container {
