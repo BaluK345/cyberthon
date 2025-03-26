@@ -49,7 +49,7 @@ function App() {
             } /> */}
             <Route path="/" element={<Logo />} />
             <Route path="/analyze" element={<FileAnalyze />} />
-            <Route path="/category" element={<Category />} />
+            { <Route path="/category" element={<Category />} /> }
             <Route path="/complaint" element={<Complaint />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />

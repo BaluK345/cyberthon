@@ -1,0 +1,113 @@
+/* Header Section */
+.category-header {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    padding: 20px;
+}
+  
+.category-logo {
+    width: 50px;
+    margin-left: 20px;
+}
+  
+.category-profile-icon {
+    font-size: 24px;
+    margin-right: -50px;
+    cursor: pointer;
+    color: black;
+}
+  
+/* Main Container - Ensuring Uniform Width */
+.category-container {
+    background-color: rgb(255, 255, 255);
+    padding: 80px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 850px; /* Matched width for both pages */
+    text-align: center;
+}
+  
+/* View Category Button */
+.view-category {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px; /* Reduced margin */
+    margin-top: -40px; /* Moved up */
+    margin-left: 350px; /* Adjusted to move more right */
+    
+}
+  
+.view-category button {
+    padding: 10px 15px;
+    background-color: rgba(15, 158, 153, 1);
+    color: rgb(255, 255, 255);
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+  
+.view-category button:hover {
+    background-color: #06a7a7;
+}
+  
+/* Description & Category Containers - SAME SIZE */
+.description-container,
+.category-box {
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 700px; /* Matched width */
+    height: 250px;
+}
+  
+.description-label,
+.category-label {
+    font-weight: bold;
+    color: black;
+    display: block;
+    text-align: left;
+}
+  
+/* Description Box - SAME WIDTH */
+.description-box,
+.category-content {
+    margin-top: 50px;
+    padding: 15px;
+    border-radius: 5px;
+    height: 150px;
+    width: 100%;
+    max-width: 700px; /* Matched width */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+/* Single Submit / Print Button */
+.submit-container {
+    margin-top: 100px; /* Increased margin to move down */
+    display: flex;
+    justify-content: center;
+}
+  
+.submit-button {
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    border-radius: 5px;
+    background-color: rgba(15, 158, 153, 1);
+}
+  
+.submit-button:hover {
+    background-color: #06a7a7;
+}

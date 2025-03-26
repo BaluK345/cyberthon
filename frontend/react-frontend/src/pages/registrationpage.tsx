@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./registrationpage.css";
 import logo from "../assets/logo_cyber.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 
 const RegistrationPage: React.FC = () => {
   const navigate = useNavigate();
@@ -21,10 +22,32 @@ const RegistrationPage: React.FC = () => {
     confirmPassword: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" }); // Clear error when typing
+  };
+
+  // Handle Enter key press to move to the next input
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent form submission
+
+      const form = e.currentTarget.form;
+      if (form) {
+        const index = Array.from(form.elements).indexOf(e.currentTarget);
+        const nextElement = form.elements[index + 1] as HTMLElement;
+
+        if (nextElement) {
+          nextElement.focus();
+        } else {
+          handleSignUp(); // If last input, trigger sign-up
+        }
+      }
+    }
   };
 
   // Validate and navigate to OTP Page
@@ -52,39 +75,82 @@ const RegistrationPage: React.FC = () => {
       <div className="registration-page-box">
         <h2 className="registration-page-title">Register</h2>
 
-        <div className="registration-page-input-group">
-          <label>Name:</label>
-          <input type="text" name="name" placeholder="Enter your Name" value={formData.name} onChange={handleChange} />
-          {errors.name && <p className="error-text">{errors.name}</p>}
-        </div>
+        <form>
+          <div className="registration-page-input-group">
+            <label>Name:</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your Name"
+              value={formData.name}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+            />
+            {errors.name && <p className="error-text">{errors.name}</p>}
+          </div>
 
-        <div className="registration-page-input-group">
-          <label>Phone Number:</label>
-          <input type="tel" name="phone" placeholder="Enter your Phone Number" value={formData.phone} onChange={handleChange} />
-          {errors.phone && <p className="error-text">{errors.phone}</p>}
-        </div>
+          <div className="registration-page-input-group">
+            <label>Phone Number:</label>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Enter your Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+            />
+            {errors.phone && <p className="error-text">{errors.phone}</p>}
+          </div>
 
-        <div className="registration-page-input-group">
-          <label>Email:</label>
-          <input type="email" name="email" placeholder="Enter your Email" value={formData.email} onChange={handleChange} />
-          {errors.email && <p className="error-text">{errors.email}</p>}
-        </div>
+          <div className="registration-page-input-group">
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your Email"
+              value={formData.email}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+            />
+            {errors.email && <p className="error-text">{errors.email}</p>}
+          </div>
 
-        <div className="registration-page-input-group">
-          <label>Password:</label>
-          <input type="password" name="password" placeholder="Enter your Password" value={formData.password} onChange={handleChange} />
-          {errors.password && <p className="error-text">{errors.password}</p>}
-        </div>
+          <div className="registration-page-input-group password-input-wrapper">
+            <label>Password:</label>
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Enter your Password"
+              value={formData.password}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+            />
+            <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+            {errors.password && <p className="error-text">{errors.password}</p>}
+          </div>
 
-        <div className="registration-page-input-group">
-          <label>Confirm Password:</label>
-          <input type="password" name="confirmPassword" placeholder="Enter Confirm Password" value={formData.confirmPassword} onChange={handleChange} />
-          {errors.confirmPassword && <p className="error-text">{errors.confirmPassword}</p>}
-        </div>
+          <div className="registration-page-input-group password-input-wrapper">
+            <label>Confirm Password:</label>
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              name="confirmPassword"
+              placeholder="Enter Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+            />
+            <span className="eye-icon" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+            {errors.confirmPassword && <p className="error-text">{errors.confirmPassword}</p>}
+          </div>
 
-        <button className="registration-page-sign-up-button" onClick={handleSignUp}>
-          Sign Up
-        </button>
+          <button className="registration-page-sign-up-button" type="button" onClick={handleSignUp}>
+            Sign Up
+          </button>
+        </form>
 
         <p className="registration-page-signin-text">
           Have an account?{" "}

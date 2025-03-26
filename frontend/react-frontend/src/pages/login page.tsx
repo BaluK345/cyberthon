@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./loginpage.css";
 import logo from "../assets/logo_cyber.png"; // Ensure correct path
@@ -17,10 +17,26 @@ const LoginPage: React.FC = () => {
     password: "",
   });
 
+  // Refs for input fields
+  const passwordRef = useRef<HTMLInputElement>(null);
+
   // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" }); // Clear error when typing
+  };
+
+  // Handle Enter key navigation
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent form submission
+
+      if (e.currentTarget.name === "email") {
+        passwordRef.current?.focus(); // Move to password field
+      } else if (e.currentTarget.name === "password") {
+        handleSignIn(); // Submit when pressing Enter on password
+      }
+    }
   };
 
   // Validate and submit
@@ -63,6 +79,7 @@ const LoginPage: React.FC = () => {
             placeholder="Enter your Email or Mobile Number"
             value={formData.email}
             onChange={handleChange}
+            onKeyDown={handleKeyDown} // Handle Enter key
           />
           {errors.email && <p className="error-text">{errors.email}</p>}
         </div>
@@ -76,6 +93,8 @@ const LoginPage: React.FC = () => {
             placeholder="Enter your Password"
             value={formData.password}
             onChange={handleChange}
+            onKeyDown={handleKeyDown} // Handle Enter key
+            ref={passwordRef} // Ref for password input
           />
           {errors.password && <p className="error-text">{errors.password}</p>}
         </div>
