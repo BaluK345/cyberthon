@@ -2,7 +2,7 @@
 body {
     background-color: #efe9e0;
     margin: 0;
-    font-family: "Krona One", sans-serif;
+    font-family: "Poppins", sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,8 +31,8 @@ body {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
-    color: black;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
     font-weight: bold;
 }
 
@@ -210,14 +210,14 @@ body {
 }
 
 .news-item h3 {
-    font-size: 14px;
+    font-size: 18px;
     color: #333;
     font-weight: bold;
     margin-bottom: 6px;
 }
 
 .news-item p {
-    font-size: 12px;
+    font-size: 16px;
     color: #666;
     margin-bottom: 6px;
     flex-grow: 1;
@@ -239,6 +239,6 @@ body {
 /* Placeholder Text */
 .no-news {
     text-align: center;
-    font-size: 12px;
+    font-size: 16px;
     color: gray;
 }
