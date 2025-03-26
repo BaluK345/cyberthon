@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import navigation hook
 import axios from "axios";
 import "./complaint.css";
 import logo from "../assets/logo_cyber.png";
 import { FaSearch, FaChevronDown, FaChevronUp, FaUser } from "react-icons/fa";
 
 const Complaint: React.FC = () => {
+  const navigate = useNavigate(); // Initialize navigation
   const [query, setQuery] = useState("");
   const [news, setNews] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -68,7 +70,9 @@ const Complaint: React.FC = () => {
       <div className="logo-container">
         <img src={logo} alt="Crime Atlas Logo" className="logo" />
       </div>
-      <button className="complaint-button">Complaint</button>
+      <button className="complaint-button" onClick={() => navigate("/analyze")}>
+        Complaint
+      </button>
       <button className="user-profile-button">
         <FaUser className="profile-icon" />
       </button>
@@ -99,7 +103,6 @@ const Complaint: React.FC = () => {
                 <h3>{article.title}</h3>
                 <p>{article.description}</p>
                 <a href={article.url} target="_blank" rel="noopener noreferrer">
-                
                 </a>
               </div>
             ))}
