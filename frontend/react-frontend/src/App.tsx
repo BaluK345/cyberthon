@@ -23,7 +23,7 @@ function App() {
           </nav>
 
           <Routes>
-            <Route path="/" element={
+            {/* <Route path="/" element={
               <div>
                 <div>
                   <a href="https://vitejs.dev" target="_blank">
@@ -46,8 +46,8 @@ function App() {
                   Click on the Vite and React logos to learn more
                 </p>
               </div>
-            } />
-            <Route path="/logo" element={<Logo />} />
+            } /> */}
+            <Route path="/" element={<Logo />} />
             <Route path="/analyze" element={<FileAnalyze />} />
             <Route path="/category" element={<Category />} />
             <Route path="/complaint" element={<Complaint />} />
