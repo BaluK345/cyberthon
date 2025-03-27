@@ -12,7 +12,7 @@ const Complaint: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     fetchTrendingNews();
@@ -66,7 +66,6 @@ const Complaint: React.FC = () => {
     }
   };
 
-  // Toggle Sidebar Visibility
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -92,9 +91,7 @@ const Complaint: React.FC = () => {
         <button className="close-sidebar-button" onClick={toggleSidebar}>
           <FaTimes size={24} />
         </button>
-        
-        <button className="sidebar-button">Your Profile</button>
-        <button className="sidebar-button">Your Complaint</button>
+        <button className="sidebar-button" onClick={() => navigate("/profile")}>Your Profile</button>
       </div>
 
       <div className="search-container">

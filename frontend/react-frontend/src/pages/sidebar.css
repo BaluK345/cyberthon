@@ -66,3 +66,30 @@
 .overlay.show {
     display: block;
 }
+
+/* Profile & Complaint Container */
+.profile-container {
+    width: 100%;
+    background-color: #eae1d7; /* Light beige */
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+/* Profile Section Title */
+.profile-container h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: black;
+}
+
+/* Profile Details Box */
+.profile-box {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: black;
+}

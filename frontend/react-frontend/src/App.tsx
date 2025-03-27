@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
 import Sidebar from "./pages/sidebar"; 
 import "./App.css";
 import Logo from "./pages/logo";
@@ -10,6 +10,7 @@ import LoginPage from "./pages/login page";
 import RegistrationPage from "./pages/registrationpage";
 import OTPPage from "./pages/otp";
 import { DescriptionProvider } from "./pages/DescriptionContext";
+import Profile from "./pages/profilepage"; // Import Profile component
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -23,12 +24,9 @@ function App() {
 
           {/* Navigation Bar */}
           <nav className="flex gap-4 p-4 bg-gray-100 relative">
-            <button
-              className="bg-gray-200 px-4 py-2 rounded"
-              onClick={() => setIsSidebarOpen(true)}
-            >
+            <Link to="/profile" className="bg-gray-200 px-4 py-2 rounded">
               Your Profile
-            </button>
+            </Link>
             <Link to="/complaint" className="bg-gray-200 px-4 py-2 rounded">
               Your Complaint
             </Link>
@@ -43,11 +41,20 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
             <Route path="/otp" element={<OTPPage />} />
+            
+            {/* Profile Route with Close Functionality */}
+            <Route path="/profile" element={<ProfileWithClose />} />
           </Routes>
         </div>
       </Router>
     </DescriptionProvider>
   );
 }
+
+// Wrapper for Profile to handle closing
+const ProfileWithClose = () => {
+  const navigate = useNavigate(); // React Router Hook to navigate
+  return <Profile onClose={() => navigate(-1)} />; // Navigates back when closing
+};
 
 export default App;
