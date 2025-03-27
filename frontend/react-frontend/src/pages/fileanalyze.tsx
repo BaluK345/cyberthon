@@ -3,16 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useDescription } from "./DescriptionContext";
 import "./fileanalyze.css";
 import crimeAtlasLogo from "../assets/logo_cyber.png";
-import { FaUser } from "react-icons/fa"; // User profile icon
 
 const FileAnalyze: React.FC = () => {
   const navigate = useNavigate();
   const { description, setDescription } = useDescription();
   const [activeTab, setActiveTab] = useState<"file" | "description">("file");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [fileProof, setFileProof] = useState<File | null>(null); // Proof for File tab
-  const [descriptionProof, setDescriptionProof] = useState<File | null>(null); // Proof for Description tab
-  const [inputDescription, setInputDescription] = useState<string>(description); // Local description
+  const [fileProof, setFileProof] = useState<File | null>(null);
+  const [descriptionProof, setDescriptionProof] = useState<File | null>(null);
+  const [inputDescription, setInputDescription] = useState<string>(description);
 
   // Handle file upload
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,9 +24,9 @@ const FileAnalyze: React.FC = () => {
   const handleProofChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       if (activeTab === "file") {
-        setFileProof(event.target.files[0]); // Update proof for File tab
+        setFileProof(event.target.files[0]);
       } else {
-        setDescriptionProof(event.target.files[0]); // Update proof for Description tab
+        setDescriptionProof(event.target.files[0]);
       }
     }
   };
@@ -35,29 +34,29 @@ const FileAnalyze: React.FC = () => {
   // Handle analyze button
   const handleAnalyze = () => {
     if (activeTab === "file") {
-      setActiveTab("description"); // Navigate to Description tab
+      navigate("/category"); // Directly navigate to the Category page
     } else if (activeTab === "description") {
-      setDescription(inputDescription); // Save description globally
-      navigate("/category"); // Navigate to the category page
+      setDescription(inputDescription);
+      navigate("/category");
     }
   };
 
   return (
     <div className="fa-container">
-      {/* Logo */}
-      <img src={crimeAtlasLogo} alt="Logo" className="fa-logo" />
+      {/* Logo - Navigates to Complaint Page */}
+      <img 
+        src={crimeAtlasLogo} 
+        alt="Logo" 
+        className="fa-logo" 
+        onClick={() => navigate("/complaint")} 
+        style={{ cursor: "pointer" }} 
+      />
 
       {/* Back Button */}
-      <button className="fa-back-button" onClick={() => navigate(-1)}>Back</button>
-
-      {/* User Profile (Top Right) */}
-      <div className="fa-user-profile">
-        <FaUser className="fa-user-icon" />
-      </div>
+      <button className="fa-back-button" onClick={() => navigate(-1)}> Back </button>
 
       {/* Main Content */}
       <div className="fa-content">
-        {/* Tabs Positioned at Border */}
         <div className="fa-tabs">
           <button
             className={`fa-tab ${activeTab === "file" ? "active" : ""}`}
@@ -73,11 +72,9 @@ const FileAnalyze: React.FC = () => {
           </button>
         </div>
 
-        {/* Content Box */}
         <div className="fa-box">
           {activeTab === "file" && (
             <div className="fa-upload-section">
-              {/* File Upload */}
               <div className="fa-input-group">
                 <label className="fa-label">File:</label>
                 <input
@@ -95,7 +92,6 @@ const FileAnalyze: React.FC = () => {
                 {selectedFile && <p className="fa-file-name">{selectedFile.name}</p>}
               </div>
 
-              {/* Proof Upload (File Tab) */}
               <div className="fa-input-group">
                 <label className="fa-label">Proof:</label>
                 <input
@@ -114,7 +110,6 @@ const FileAnalyze: React.FC = () => {
                 {fileProof && <p className="fa-file-name">{fileProof.name}</p>}
               </div>
 
-              {/* Analyze Button (File Tab) */}
               <button className="fa-analyze-button-file" onClick={handleAnalyze}>
                 Analyze
               </button>
@@ -133,7 +128,6 @@ const FileAnalyze: React.FC = () => {
                 />
               </div>
 
-              {/* Proof Upload (Description Tab) */}
               <div className="fa-input-group">
                 <label className="fa-label">Proof:</label>
                 <input
@@ -154,7 +148,6 @@ const FileAnalyze: React.FC = () => {
                 {descriptionProof && <p className="fa-file-name">{descriptionProof.name}</p>}
               </div>
 
-              {/* Analyze Button (Description Tab) */}
               <button className="fa-analyze-button-description" onClick={handleAnalyze}>
                 Analyze
               </button>

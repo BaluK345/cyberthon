@@ -19,8 +19,8 @@
 /* Back Button */
 .fa-back-button {
   position: absolute;
-  top: -1px;
-  right: -50px;
+  top: -90px;
+  right: -180px;
   background-color: #b9b9b9;
   color: rgb(96, 95, 95);
   border: none;
@@ -29,24 +29,6 @@
   cursor: pointer;
 }
 
-/* User Profile (Top-Right) */
-.fa-user-profile {
-  position: absolute;
-  top: -90px;
-  right: -200px;
-  background-color: transparent;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.fa-user-icon {
-  width: 35px;
-  height: 35px;
-  color: #000;
-  transition: transform 0.2s;
-}
 
 /* Main Content */
 .fa-content {

@@ -1,5 +1,4 @@
 import React from "react";
-import "./sidebar.css";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -8,11 +7,18 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   return (
-    <div className={`sidebar ${isOpen ? "open" : ""}`}>
-      <button className="sidebar-button">Your Profile</button>
-      <button className="sidebar-button">Your Complaint</button>
-      <button className="sidebar-close" onClick={onClose}>Close</button>
-    </div>
+    <>
+      {/* Sidebar */}
+      <div className={`sidebar ${isOpen ? "open" : ""}`}>
+        <button className="close-btn" onClick={onClose}>✖</button>
+
+        <button className="sidebar-button">Your Profile</button>
+        <button className="sidebar-button">Your Complaint</button>
+      </div>
+
+      {/* Overlay */}
+      {isOpen && <div className="overlay show" onClick={onClose}></div>}
+    </>
   );
 };
 

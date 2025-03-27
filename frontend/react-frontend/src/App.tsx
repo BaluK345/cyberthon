@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Sidebar from "./pages/sidebar"; // Import Sidebar component
-import reactLogo from "./assets/react.svg";
+import Sidebar from "./pages/sidebar"; 
 import "./App.css";
 import Logo from "./pages/logo";
 import FileAnalyze from "./pages/fileanalyze";
@@ -19,11 +18,11 @@ function App() {
     <DescriptionProvider>
       <Router>
         <div className="App">
-          {/* Sidebar Component */}
+          {/* Sidebar */}
           <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
           {/* Navigation Bar */}
-          <nav className="flex gap-4 p-4 bg-gray-100">
+          <nav className="flex gap-4 p-4 bg-gray-100 relative">
             <button
               className="bg-gray-200 px-4 py-2 rounded"
               onClick={() => setIsSidebarOpen(true)}

@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import navigation hook
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./complaint.css";
 import logo from "../assets/logo_cyber.png";
-import { FaSearch, FaChevronDown, FaChevronUp, FaUser } from "react-icons/fa";
+import { FaSearch, FaChevronDown, FaChevronUp, FaUser, FaTimes } from "react-icons/fa";
 
 const Complaint: React.FC = () => {
-  const navigate = useNavigate(); // Initialize navigation
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [news, setNews] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
 
   useEffect(() => {
     fetchTrendingNews();
@@ -65,17 +66,37 @@ const Complaint: React.FC = () => {
     }
   };
 
+  // Toggle Sidebar Visibility
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className="container">
       <div className="logo-container">
         <img src={logo} alt="Crime Atlas Logo" className="logo" />
       </div>
+
+      {/* Complaint Button */}
       <button className="complaint-button" onClick={() => navigate("/analyze")}>
         Complaint
       </button>
-      <button className="user-profile-button">
+
+      {/* Profile Icon */}
+      <button className="user-profile-button" onClick={toggleSidebar}>
         <FaUser className="profile-icon" />
       </button>
+
+      {/* Sidebar */}
+      <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <button className="close-sidebar-button" onClick={toggleSidebar}>
+          <FaTimes size={24} />
+        </button>
+        
+        <button className="sidebar-button">Your Profile</button>
+        <button className="sidebar-button">Your Complaint</button>
+      </div>
+
       <div className="search-container">
         <FaSearch className="search-icon" size={25} />
         <input
@@ -103,6 +124,7 @@ const Complaint: React.FC = () => {
                 <h3>{article.title}</h3>
                 <p>{article.description}</p>
                 <a href={article.url} target="_blank" rel="noopener noreferrer">
+                  Read More
                 </a>
               </div>
             ))}
@@ -111,7 +133,7 @@ const Complaint: React.FC = () => {
           <p className="no-news">No news available.</p>
         )}
 
-        {/* Scroll Buttons inside Content Box */}
+        {/* Scroll Buttons */}
         <div className="scroll-buttons">
           <button className="scroll-button" onClick={scrollToPreviousNews}>
             <FaChevronUp size={24} />

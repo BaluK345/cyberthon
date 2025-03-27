@@ -1,31 +1,35 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./category.css";
-import logo from "../assets/logo_cyber.png"; // Ensure you have the logo
-import { FaUser } from "react-icons/fa";
+import logo from "../assets/logo_cyber.png";
 import { useDescription } from "./DescriptionContext";
 
 const Category: React.FC = () => {
+  const navigate = useNavigate();
   const [showCategory, setShowCategory] = useState(false);
   const { description } = useDescription();
 
   return (
     <div className="category-body">
-      {/* Header: Logo & User Profile */}
+      {/* Header: Logo - Navigates to Complaint Page */}
       <div className="category-header">
-        <img src={logo} alt="Logo" className="category-logo" />
-        <FaUser className="category-profile-icon" />
+        <img 
+          src={logo} 
+          alt="Logo" 
+          className="category-logo" 
+          onClick={() => navigate("/complaint")} 
+          style={{ cursor: "pointer" }} 
+        />
       </div>
 
       {/* Page Container */}
       <div className="category-container">
-        {/* View Category Toggle Button */}
         <div className="view-category">
           <button onClick={() => setShowCategory(!showCategory)}>
-           <span>{showCategory ? "<" : ">"}</span>
+            View Category {showCategory ? "<" : ">"}
           </button>
         </div>
 
-        {/* Conditional Rendering: Description or Category */}
         {!showCategory ? (
           <div className="description-container">
             <label className="description-label">Description:</label>
@@ -38,7 +42,6 @@ const Category: React.FC = () => {
           </div>
         )}
 
-        {/* Single Submit/Print Button */}
         <div className="submit-container">
           <button className="submit-button">Submit / Print</button>
         </div>

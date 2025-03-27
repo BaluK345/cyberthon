@@ -3,10 +3,100 @@ body {
     background-color: #efe9e0;
     margin: 0;
     font-family: "Poppins", sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 255);
+    z-index: 998; /* Lower than sidebar but above other content */
+    display: none;
+}
+
+.sidebar.open + .sidebar-overlay {
+    display: block;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 200px;
     height: 100vh;
+    background-color: white;
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    z-index: 10000;
+}
+
+/* Open Sidebar */
+.sidebar.open {
+    right: 0;
+}
+
+/* Close Sidebar Button */
+.close-sidebar-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    font-size: 16px;
+    color: rgb(81, 81, 81);
+    cursor: pointer;
+}
+
+/* Sidebar Buttons */
+.sidebar-button {
+    width: 160px;
+    padding: 10px 20px;
+    background-color: #f2f2f2; /* Light grey */
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 80px;
+    text-align: center;
+}
+
+.sidebar-button + .sidebar-button {
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.sidebar-button:hover {
+    background-color: #ddd;
+}
+
+/* User Profile Button */
+.user-profile-button {
+    position: absolute;
+    top: 40px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it's above content */
+}
+
+/* Profile Icon */
+.profile-icon {
+    width: 35px;
+    height: 35px;
+    color: black;
+}
+
+/* Ensure content doesn’t overlap */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
 
 /* Logo Styling */
@@ -39,28 +129,6 @@ body {
 .complaint-button:hover {
     background-color: #06a7a7;
 }
-
-/* User Profile Button */
-.user-profile-button {
-    position: absolute;
-    top: 40px;
-    right: 15px;
-    background-color: transparent;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-}
-
-/* Profile Icon Styling */
-.profile-icon {
-    width: 35px;
-    height: 35px;
-    color: black; /* Change color to black */
-    transition: transform 0.2s;
-}
-
 
 /* Search Bar */
 .search-container {
@@ -112,6 +180,7 @@ body {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: space-around;
+    z-index: 1; /* Ensure it's below sidebar */
 }
 
 /* Custom Scrollbar */

@@ -15,12 +15,6 @@
     margin-left: 20px;
 }
   
-.category-profile-icon {
-    font-size: 40px;
-    margin-right: -70px;
-    cursor: pointer;
-    color: black;
-}
   
 /* Main Container - Ensuring Uniform Width */
 .category-container {
@@ -31,6 +25,7 @@
     width: 100%;
     max-width: 850px; /* Matched width for both pages */
     text-align: center;
+    margin-left: -60px;
 }
   
 /* View Category Button */
@@ -56,21 +51,11 @@
     display: flex;
     align-items: center;
     transition: all 0.3s ease-in-out;
-    width: 50px; /* Initially small to fit '>' */
+    width: 150px; /* Initially small to fit '>' */
     overflow: hidden;
     white-space: nowrap;
 }
 
-
-/* On hover, show full text */
-.view-category button:hover {
-    width: auto; /* Expand button */
-    padding: 10px 20px;
-}
-
-.view-category button:hover::before {
-    content: "View Category ";
-}
   
 .view-category button:hover {
     background-color: #06a7a7;
