@@ -1,0 +1,136 @@
+/* Header Section */
+.category-header {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    padding: 20px;
+}
+  
+.category-logo {
+    width: 50px;
+    margin-left: 20px;
+}
+  
+.category-profile-icon {
+    font-size: 40px;
+    margin-right: -70px;
+    cursor: pointer;
+    color: black;
+}
+  
+/* Main Container - Ensuring Uniform Width */
+.category-container {
+    background-color: rgb(255, 255, 255);
+    padding: 80px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 900px; /* Matched width for both pages */
+    text-align: justify;
+
+}
+  
+/* View Category Button */
+.view-category {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px; /* Reduced margin */
+    margin-top: -40px; /* Moved up */
+    margin-left: 350px; 
+    position: relative;
+    
+}
+  
+.view-category button {
+    padding: 10px 15px;
+    background-color: rgba(15, 158, 153, 1);
+    color: rgb(255, 255, 255);
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    width: 50px; /* Initially small to fit '>' */
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+/* On hover, show full text */
+.view-category button:hover {
+    width: auto; /* Expand button */
+    padding: 10px 20px;
+}
+
+.view-category button:hover::before {
+    content: "View Category ";
+}
+  
+.view-category button:hover {
+    background-color: #06a7a7;
+}
+  
+/* Description & Category Containers - SAME SIZE */
+.description-container,
+.category-box {
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 700px; /* Matched width */
+    height: 250px;
+}
+  
+.description-label,
+.category-label {
+    font-size: 20px !important;
+    font-weight: bold;
+    color: black;
+    display: block;
+    text-align: left;
+}
+  
+/* Description Box - SAME WIDTH */
+.description-box,
+.category-content {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 50px;
+    padding: 15px;
+    border-radius: 5px;
+    height: 150px;
+    width: 100%;
+    max-width: 700px; /* Matched width */
+    display: flex;
+}
+  
+/* Single Submit / Print Button */
+.submit-container {
+    margin-top: 100px; /* Increased margin to move down */
+    display: flex;
+    justify-content: center;
+}
+  
+.submit-button {
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: rgba(15, 158, 153, 1);
+}
+  
+.submit-button:hover {
+    background-color: #06a7a7;
+}

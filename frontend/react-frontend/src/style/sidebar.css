@@ -1,0 +1,35 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px; /* Hidden initially */
+    width: 250px;
+    height: 100%;
+    background-color: #f5f0e6;
+    transition: right 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+  }
+  
+  .sidebar.open {
+    right: 0; /* Show sidebar when open */
+  }
+  
+  .sidebar-button {
+    background-color: #e0dbd3;
+    border: none;
+    padding: 10px 20px;
+    width: 80%;
+    margin: 10px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  
+  .sidebar-button:hover {
+    background-color: #d6cfc4;
+  }
+  

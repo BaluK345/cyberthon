@@ -1,0 +1,244 @@
+/* General Styling */
+body {
+    background-color: #efe9e0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Logo Styling */
+.logo-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
+/* Complaint Button */
+.complaint-button {
+    position: absolute;
+    top: 50px;
+    right: 140px;
+    padding: 10px 35px;
+    background-color: rgba(15, 158, 153, 1);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.complaint-button:hover {
+    background-color: #06a7a7;
+}
+
+/* User Profile Button */
+.user-profile-button {
+    position: absolute;
+    top: 40px;
+    right: 15px;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+/* Profile Icon Styling */
+.profile-icon {
+    width: 35px;
+    height: 35px;
+    color: black; /* Change color to black */
+    transition: transform 0.2s;
+}
+
+
+/* Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+    width: 400px;
+    height: 50px;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.search-icon {
+    color: black;
+    margin-right: 15px;
+}
+
+.search-bar {
+    border: none;
+    outline: none;
+    font-size: 20px;
+    width: 100%;
+    color: black;
+    background: transparent;
+}
+
+/* Main Content Box */
+.content-box {
+    width: 100%;
+    max-width: 1250px;
+    height: 500px;
+    background: white;
+    border-radius: 10px;
+    position: absolute;
+    top: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+/* Custom Scrollbar */
+.content-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content-box::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 6px;
+}
+
+.content-box::-webkit-scrollbar-track {
+    background: #e0e0e0;
+}
+
+.content-box {
+    scrollbar-color: grey #e0e0e0;
+    scrollbar-width: thin;
+}
+
+/* News Container */
+.news-container {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Scroll Buttons inside Content Box */
+.scroll-buttons {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Scroll Button Styling */
+.scroll-button {
+    width: 45px;
+    height: 45px;
+    background-color: #008c8c;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure the arrows are visible */
+.scroll-button svg {
+    color: black;
+    width: 30px;
+    height: 30px;
+}
+
+/* Hover Effect */
+.scroll-button:hover {
+    background-color: #006f6f;
+    transform: scale(1.1);
+}
+
+/* News Item Card */
+.news-item {
+    background: white;
+    width: 380px;
+    height: 420px;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.news-item:hover {
+    transform: scale(1.02);
+}
+
+/* News Image */
+.news-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.news-item h3 {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.news-item p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 6px;
+    flex-grow: 1;
+}
+
+.news-item a {
+    display: inline-block;
+    color: #008c8c;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.news-item a:hover {
+    text-decoration: underline;
+}
+
+/* Placeholder Text */
+.no-news {
+    text-align: center;
+    font-size: 16px;
+    color: gray;
+}
