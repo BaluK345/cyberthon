@@ -1,0 +1,249 @@
+/* General Container */
+.fa-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1000px;
+  background-color: #eee8e0; /* Light beige */
+  position: relative;
+}
+
+/* Logo */
+.fa-logo {
+  position: absolute;
+  top: -150px;
+  left: -380px;
+  width: 50px;
+}
+
+/* Back Button */
+.fa-back-button {
+  position: absolute;
+  top: -140px;
+  right: -310px;
+  background-color: #b9b9b9;
+  color: rgb(96, 95, 95);
+  border: none;
+  padding: 3px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* User Profile (Top-Right) */
+.fa-user-profile {
+  position: absolute;
+  top: -90px;
+  right: -200px;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fa-user-icon {
+  width: 35px;
+  height: 35px;
+  color: #000;
+  transition: transform 0.2s;
+}
+
+/* Main Content */
+.fa-content {
+  width: 120%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+}
+
+/* Tabs Positioned to Touch Border with Sharp Edges */
+.fa-tabs {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.fa-tab {
+  flex: 1;
+  padding: 15px;
+  font-weight: bold;
+  font-size: 22px;
+  color: #000;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 0; /* Sharp edges */
+}
+
+.fa-tab.active {
+  background-color: #15837c;
+}
+
+/* Content Wrapper for Tabs */
+.fa-tab-content {
+  display: none;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+}
+
+.fa-tab-content.active {
+  display: block;
+}
+
+/* Box for Upload Inputs */
+.fa-box {
+  width: 90%;
+  height: 395px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 34px;
+  margin-top: 60px;
+}
+
+
+/* Upload Section */
+.fa-upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
+.fa-input-group {
+  display: flex;
+  align-items: center;
+  gap: 40px !important; 
+  margin-top: 30px; /* Adjusted spacing */
+  margin-bottom: 30px;
+}
+
+/* Label */
+.fa-label {
+  font-weight: bold;
+  font-size: 18px !important;
+  color: #000;
+  white-space: nowrap; /* Prevents label from wrapping */
+  margin-bottom: 5px; /* Added gap between label and input */
+}
+
+/* Upload Buttons - Same Height & Width */
+.fa-upload-button {
+  background-color: #c4c3c3;
+  color: rgb(82, 82, 82);
+  font-size: 16px;
+  padding: 12px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  width: 200px !important; /* Same width */
+  height: 40px; /* Same height */
+}
+
+.fa-upload-button:hover {
+  background-color: #909090;
+}
+
+/* Analyze Buttons - Separate for Each Tab */
+.fa-analyze-button-file {
+  background-color: #15837c !important;
+  color: rgb(255, 255, 255) !important;
+  font-size: 18px !important;
+  font-weight: bold;
+  padding: 12px 25px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-top: 140px !important; /* Adjusted spacing */
+}
+
+.fa-analyze-button-file:hover {
+  background-color: #126b65 !important;
+}
+
+/* Analyze Button (Only for Description Tab) */
+.fa-analyze-button-description {
+  background-color: #15837c !important;
+  color: rgb(255, 255, 255) !important;
+  font-size: 18px !important;
+  font-weight: bold;
+  padding: 12px 25px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px !important; /* Reduced spacing to bring it up */
+  margin-bottom: 170px;
+}
+
+.fa-analyze-button-description:hover {
+  background-color: #126b65 !important;
+}
+
+
+/* Hide default file input */
+.fa-hidden-input {
+  display: none;
+}
+
+/* Display selected file name */
+.fa-file-name {
+  font-size: 14px;
+  color: #333;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+/* Description Section */
+.fa-description-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin-top: 80px;
+}
+
+/* Description Box */
+.fa-description-box {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  margin-top: 100px;
+  border-radius: 10px;
+  border: 1px solid #ffffff;
+  background-color: rgb(232, 232, 232);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Move "Description:" label inside the box */
+.fa-description-label {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 16px;
+  color: #000000;
+  padding: 2px 5px;
+}
+
+/* Textarea */
+.fa-description-input {
+  width: 100%;
+  height: 100%;
+  padding: 45px 10px 15px 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: transparent;
+  color: black;
+  resize: none;
+
+}

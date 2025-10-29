@@ -1,0 +1,164 @@
+/* Page Background */
+body {
+    background-color: #eee7df;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Centered Logo */
+.login-page-logo-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.login-page-logo {
+    width: 80px; 
+}
+
+/* Login Box */
+.login-page-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    height: 400px;
+    text-align: center;
+}
+
+/* Login Title */
+.login-page-title {
+    font-size: 30px;
+    color: black;
+    font-weight: bold;
+    margin-top: -10px;
+}
+
+/* Input Group */
+.login-page-input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.login-page-label {
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Input Field Styling */
+.login-page-input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ffffff; /* Light grey border */
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f5f5f5;
+    color: black; /* Ensures text is black */
+}
+
+/* Placeholder Text Color */
+.login-page-input-group input::placeholder {
+    color: #666; /* Slightly darker grey for contrast */
+}
+
+
+/* Input Boxes */
+.login-page-email-box,
+.login-page-password-box {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #000;
+    background-color: #f0f0f0;
+}
+
+.login-page-email-box {
+    margin-bottom: 15px;
+}
+
+.login-page-password-box {
+    margin-bottom: 10px;
+}
+
+/* Show Password Checkbox Container */
+.login-page-checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+/* Custom Checkbox Styling */
+.login-page-checkbox-container input {
+    width: 12px; /* Increased size for better visibility */
+    height: 12px;
+    background-color: white;
+    border: 2px solid black;
+    appearance: none; /* Removes default checkbox */
+    cursor: pointer;
+    border-radius: 3px; 
+    display: inline-block;
+    position: relative;
+}
+
+/* Show Tick Symbol When Checked */
+.login-page-checkbox-container input:checked {
+    background-color: rgb(220, 220, 220);
+    position: relative;
+}
+
+/* Add Tick Symbol */
+.login-page-checkbox-container input:checked::after {
+    content: "✔"; /* Unicode tick symbol */
+    font-size: 10px;
+    color: rgb(60, 60, 60);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.login-page-checkbox-label {
+    font-size: 12px;
+    color: #000;
+}
+
+/* Sign In Button */
+.login-page-sign-in-button {
+    width: 40%;
+    background-color: #008c8c;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.login-page-sign-in-button:hover {
+    background-color: #025951;
+}
+
+/* Sign Up Text */
+.login-page-signup-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: black;
+}
+
+.login-page-signup-link {
+    color: #02735E;
+    font-weight: bold;
+    cursor: pointer;
+}
