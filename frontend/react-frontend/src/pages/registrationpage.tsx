@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./registrationpage.css";
+import "../styles/common.css";
 import logo from "../assets/logo_cyber.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
+import { useAuth } from "../context/AuthContext";
 
 const RegistrationPage: React.FC = () => {
   const navigate = useNavigate();
+  const { register } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -20,10 +23,12 @@ const RegistrationPage: React.FC = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    general: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,10 +56,14 @@ const RegistrationPage: React.FC = () => {
   };
 
   // Validate and navigate to OTP Page
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     let newErrors = { ...errors };
     let hasError = false;
 
+    // Reset general error
+    newErrors.general = "";
+
+    // Basic field validation
     Object.keys(formData).forEach((key) => {
       if (!formData[key as keyof typeof formData]) {
         newErrors[key as keyof typeof formData] = `This ${key} is required`;
@@ -62,8 +71,56 @@ const RegistrationPage: React.FC = () => {
       }
     });
 
+    // Password validation
+    if (formData.password && formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters long";
+      hasError = true;
+    }
+
+    // Confirm password validation
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+      hasError = true;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (formData.email && !emailRegex.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+      hasError = true;
+    }
+
+    // Phone validation
+    const phoneRegex = /^\d{10}$/;
+    if (formData.phone && !phoneRegex.test(formData.phone)) {
+      newErrors.phone = "Please enter a valid 10-digit phone number";
+      hasError = true;
+    }
+
     setErrors(newErrors);
-    if (!hasError) navigate("/otp"); // Navigate only if no errors
+
+    if (!hasError) {
+      setIsLoading(true);
+      try {
+        await register({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          password: formData.password,
+        });
+        
+        // Store email for OTP verification
+        localStorage.setItem('registrationEmail', formData.email);
+        navigate("/otp");
+      } catch (error: any) {
+        setErrors(prev => ({
+          ...prev,
+          general: error.message || "Registration failed. Please try again."
+        }));
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
 
   return (
@@ -76,6 +133,8 @@ const RegistrationPage: React.FC = () => {
         <h2 className="registration-page-title">Register</h2>
 
         <form>
+          {errors.general && <div className="error-text general-error">{errors.general}</div>}
+          
           <div className="registration-page-input-group">
             <label>Name:</label>
             <input
@@ -85,6 +144,7 @@ const RegistrationPage: React.FC = () => {
               value={formData.name}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
+              disabled={isLoading}
             />
             {errors.name && <p className="error-text">{errors.name}</p>}
           </div>
@@ -98,6 +158,7 @@ const RegistrationPage: React.FC = () => {
               value={formData.phone}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
+              disabled={isLoading}
             />
             {errors.phone && <p className="error-text">{errors.phone}</p>}
           </div>
@@ -111,6 +172,7 @@ const RegistrationPage: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
+              disabled={isLoading}
             />
             {errors.email && <p className="error-text">{errors.email}</p>}
           </div>
@@ -124,6 +186,7 @@ const RegistrationPage: React.FC = () => {
               value={formData.password}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
+              disabled={isLoading}
             />
             <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -140,6 +203,7 @@ const RegistrationPage: React.FC = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
+              disabled={isLoading}
             />
             <span className="eye-icon" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
               {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
@@ -147,8 +211,13 @@ const RegistrationPage: React.FC = () => {
             {errors.confirmPassword && <p className="error-text">{errors.confirmPassword}</p>}
           </div>
 
-          <button className="registration-page-sign-up-button" type="button" onClick={handleSignUp}>
-            Sign Up
+          <button 
+            className="registration-page-sign-up-button" 
+            type="button" 
+            onClick={handleSignUp}
+            disabled={isLoading}
+          >
+            {isLoading ? "Signing Up..." : "Sign Up"}
           </button>
         </form>
 
