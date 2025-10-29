@@ -2,18 +2,21 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/otp.css";
 import logo from "../assets/logo_cyber.png"; // Ensure correct logo path
+import { useAuth } from "../context/AuthContext";
 
 const OTPPage: React.FC = () => {
   const navigate = useNavigate();
+  const { verifyOTP, loading } = useAuth();
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // To disable button during verification
 
   // Handle OTP input change
   const handleOTPChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, ""); // Allow only numbers
-    setOtp(value);
-    setError(""); // Clear error when typing
+    if (value.length <= 6) {
+      setOtp(value);
+      setError(""); // Clear error when typing
+    }
   };
 
   // Handle Confirm button click
@@ -23,36 +26,21 @@ const OTPPage: React.FC = () => {
       return;
     }
 
-    const email = localStorage.getItem("userEmail"); // Retrieve stored email
+    const email = localStorage.getItem("registrationEmail"); // Use the correct key
     if (!email) {
-      setError("Session expired. Please sign up again.");
-      navigate("/signup");
+      setError("Session expired. Please register again.");
+      navigate("/registration");
       return;
     }
 
-    setLoading(true); // Disable button while verifying
-
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/verify-otp/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, otp }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        alert("OTP Verified! Redirecting to login...");
-        navigate("/login");
-      } else {
-        setError(data.error || "Invalid OTP. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setError("Something went wrong. Try again later.");
-    } finally {
-      setLoading(false); // Re-enable button
+      await verifyOTP(email, otp);
+      // Success - redirect to login
+      localStorage.removeItem("registrationEmail"); // Clean up
+      alert("OTP Verified! Registration complete. Please login.");
+      navigate("/login");
+    } catch (error: any) {
+      setError(error.message || "Invalid OTP. Please try again.");
     }
   };
 

@@ -36,6 +36,15 @@ const FileAnalyze: React.FC = () => {
   const handleAnalyze = async () => {
     try {
       setLoading(true);
+
+      // Check if user is authenticated
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        alert("Please login first");
+        navigate("/login");
+        return;
+      }
+
       const formData = new FormData();
 
       if (selectedFile) {
@@ -47,7 +56,7 @@ const FileAnalyze: React.FC = () => {
       const response = await fetch("http://localhost:8000/api/upload/", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          Authorization: `Bearer ${token}`,
         },
         body: formData,
       });
@@ -61,7 +70,12 @@ const FileAnalyze: React.FC = () => {
         navigate("/category");
       } else {
         console.error("Error:", result);
-        alert("Error: " + (result.error || "Something went wrong"));
+        if (response.status === 401) {
+          alert("Session expired. Please login again.");
+          navigate("/login");
+        } else {
+          alert("Error: " + (result.error || "Something went wrong"));
+        }
       }
     } catch (error) {
       console.error("Upload failed:", error);

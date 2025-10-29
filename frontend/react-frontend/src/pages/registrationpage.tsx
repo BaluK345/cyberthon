@@ -1,145 +1,235 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDescription } from "./DescriptionContext";
-import "../style/fileanalyze.css";
-import crimeAtlasLogo from "../assets/logo_cyber.png";
+import "../style/registrationpage.css";
+import logo from "../assets/logo_cyber.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
+import { useAuth } from "../context/AuthContext";
 
-const FileAnalyze: React.FC = () => {
+const RegistrationPage: React.FC = () => {
   const navigate = useNavigate();
-  const { description, setDescription } = useDescription();
-  const [activeTab, setActiveTab] = useState<"file" | "description">("file");
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [proofFile, setProofFile] = useState<File | null>(null);
-  const [inputDescription, setInputDescription] = useState<string>(description);
-  const [loading, setLoading] = useState<boolean>(false);
+  const { register } = useAuth();
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  // Handle file selection
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files?.length) {
-      setSelectedFile(event.target.files[0]);
-    }
+  const [errors, setErrors] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    general: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Handle input change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" }); // Clear error when typing
   };
 
-  // Handle proof upload
-  const handleProofChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files?.length) {
-      setProofFile(event.target.files[0]);
-    }
-  };
+  // Handle Enter key press to move to the next input
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent form submission
 
-  // Handle Analyze Button
-  const handleAnalyze = async () => {
-    if (!inputDescription && !selectedFile) {
-      alert("Please provide either a description or a file.");
-      return;
-    }
+      const form = e.currentTarget.form;
+      if (form) {
+        const index = Array.from(form.elements).indexOf(e.currentTarget);
+        const nextElement = form.elements[index + 1] as HTMLElement;
 
-    try {
-      setLoading(true);
-      const formData = new FormData();
-
-      if (selectedFile) formData.append("pdf", selectedFile);
-      if (proofFile) formData.append("proof", proofFile);
-      formData.append("description", inputDescription);
-
-      const response = await fetch("http://localhost:8000/api/upload/", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-        body: formData,
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        localStorage.setItem("classificationResult", JSON.stringify(result));
-        setDescription(inputDescription);
-        navigate("/category");
-      } else {
-        alert("Error: " + (result.error || "Something went wrong"));
+        if (nextElement) {
+          nextElement.focus();
+        } else {
+          handleSignUp(); // If last input, trigger sign-up
+        }
       }
-    } catch (error) {
-      alert("Failed to process the request.");
-    } finally {
-      setLoading(false);
+    }
+  };
+
+  // Validate and navigate to OTP Page
+  const handleSignUp = async () => {
+    let newErrors = { ...errors };
+    let hasError = false;
+
+    // Reset general error
+    newErrors.general = "";
+
+    // Basic field validation
+    Object.keys(formData).forEach((key) => {
+      if (!formData[key as keyof typeof formData]) {
+        newErrors[key as keyof typeof formData] = `This ${key} is required`;
+        hasError = true;
+      }
+    });
+
+    // Password validation
+    if (formData.password && formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters long";
+      hasError = true;
+    }
+
+    // Confirm password validation
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+      hasError = true;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (formData.email && !emailRegex.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+      hasError = true;
+    }
+
+    // Phone validation
+    const phoneRegex = /^\d{10}$/;
+    if (formData.phone && !phoneRegex.test(formData.phone)) {
+      newErrors.phone = "Please enter a valid 10-digit phone number";
+      hasError = true;
+    }
+
+    setErrors(newErrors);
+
+    if (!hasError) {
+      setIsLoading(true);
+      try {
+        await register({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          password: formData.password,
+          confirm_password: formData.confirmPassword,
+        });
+        
+        // Store email for OTP verification
+        localStorage.setItem('registrationEmail', formData.email);
+        navigate("/otp");
+      } catch (error: any) {
+        setErrors(prev => ({
+          ...prev,
+          general: error.message || "Registration failed. Please try again."
+        }));
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
   return (
-    <div className="fa-container">
-      {/* Clickable Logo (Navigates to Home) */}
-      <img
-        src={crimeAtlasLogo}
-        alt="Logo"
-        className="fa-logo"
-        onClick={() => navigate("/complaint")}
-      />
-
-      {/* Back Button */}
-      <button className="fa-back-button" onClick={() => navigate(-1)}>
-        Back
-      </button>
-
-      {/* Tabs */}
-      <div className="fa-tabs">
-        <button
-          className={`fa-tab ${activeTab === "file" ? "active" : ""}`}
-          onClick={() => setActiveTab("file")}
-        >
-          File
-        </button>
-        <button
-          className={`fa-tab ${activeTab === "description" ? "active" : ""}`}
-          onClick={() => setActiveTab("description")}
-        >
-          Description
-        </button>
+    <div className="registration-page-container">
+      <div className="registration-page-logo-container">
+        <img src={logo} alt="Logo" className="registration-page-logo" />
       </div>
 
-      {/* Content */}
-      <div className="fa-box">
-        {activeTab === "file" ? (
-          <div className="fa-upload-section">
-            {/* File Upload */}
-            <label className="fa-label">File:</label>
-            <input type="file" onChange={handleFileChange} />
-            {selectedFile && <p className="fa-file-name">{selectedFile.name}</p>}
+      <div className="registration-page-box">
+        <h2 className="registration-page-title">Register</h2>
 
-            {/* Proof Upload */}
-            <label className="fa-label">Proof (Image/Video):</label>
-            <input type="file" accept="image/*,video/*" onChange={handleProofChange} />
-            {proofFile && <p className="fa-file-name">{proofFile.name}</p>}
-
-            {/* Analyze Button */}
-            <button className="fa-analyze-button" onClick={handleAnalyze} disabled={loading}>
-              {loading ? "Processing..." : "Analyze"}
-            </button>
-          </div>
-        ) : (
-          <div className="fa-description-section">
-            <label className="fa-description-label">Description:</label>
-            <textarea
-              className="fa-description-input"
-              placeholder="Describe your case..."
-              value={inputDescription}
-              onChange={(e) => setInputDescription(e.target.value)}
+        <form>
+          {errors.general && <div className="error-text general-error">{errors.general}</div>}
+          
+          <div className="registration-page-input-group">
+            <label>Name:</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your Name"
+              value={formData.name}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+              disabled={isLoading}
             />
-
-            {/* Proof Upload */}
-            <label className="fa-label">Proof (Image/Video):</label>
-            <input type="file" accept="image/*,video/*" onChange={handleProofChange} />
-            {proofFile && <p className="fa-file-name">{proofFile.name}</p>}
-
-            {/* Analyze Button */}
-            <button className="fa-analyze-button" onClick={handleAnalyze} disabled={loading}>
-              {loading ? "Processing..." : "Analyze"}
-            </button>
+            {errors.name && <p className="error-text">{errors.name}</p>}
           </div>
-        )}
+
+          <div className="registration-page-input-group">
+            <label>Phone Number:</label>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Enter your Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+              disabled={isLoading}
+            />
+            {errors.phone && <p className="error-text">{errors.phone}</p>}
+          </div>
+
+          <div className="registration-page-input-group">
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your Email"
+              value={formData.email}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+              disabled={isLoading}
+            />
+            {errors.email && <p className="error-text">{errors.email}</p>}
+          </div>
+
+          <div className="registration-page-input-group password-input-wrapper">
+            <label>Password:</label>
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Enter your Password"
+              value={formData.password}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+              disabled={isLoading}
+            />
+            <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+            {errors.password && <p className="error-text">{errors.password}</p>}
+          </div>
+
+          <div className="registration-page-input-group password-input-wrapper">
+            <label>Confirm Password:</label>
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              name="confirmPassword"
+              placeholder="Enter Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+              disabled={isLoading}
+            />
+            <span className="eye-icon" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+            {errors.confirmPassword && <p className="error-text">{errors.confirmPassword}</p>}
+          </div>
+
+          <button 
+            className="registration-page-sign-up-button" 
+            type="button" 
+            onClick={handleSignUp}
+            disabled={isLoading}
+          >
+            {isLoading ? "Signing Up..." : "Sign Up"}
+          </button>
+        </form>
+
+        <p className="registration-page-signin-text">
+          Have an account?{" "}
+          <span className="registration-page-signin-link" onClick={() => navigate("/login")}>
+            Sign In
+          </span>
+        </p>
       </div>
     </div>
   );
 };
 
-export default FileAnalyze;
+export default RegistrationPage;
